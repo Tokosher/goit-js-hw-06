@@ -13,21 +13,15 @@ const images = [
     },
 ];
 
-const listOfImagesElements = images.map(imageInfo => {
+const listOfImagesHTML = images.map(imageInfo => {
     const {url: currImageUrl, alt: currImageAlt} = imageInfo;
 
-    const liElement = document.createElement('li');
-    liElement.insertAdjacentHTML('afterbegin', `<h2>${currImageAlt}</h2>`)
-
-    const imgElement = document.createElement('img');
-    imgElement.src = currImageUrl;
-    imgElement.alt = currImageAlt;
-
-    liElement.insertAdjacentElement('beforeend', imgElement);
-
-    return liElement;
-})
+    return `<li>
+        <h2>${currImageAlt}</h2>
+        <img src="${currImageUrl}" alt="${currImageAlt}">
+    </li>`
+}).join('');
 
 const list = document.querySelector('.gallery');
-list.append(...listOfImagesElements);
+list.insertAdjacentHTML('afterbegin', listOfImagesHTML);
 
